@@ -18,6 +18,7 @@
 #' @param res number of points used to compute isochrones, one side of the square
 #' grid, the total number of points will be res*res. Increase res to obtain more
 #' detailed isochrones.
+#' @param nearest Set nearest = TRUE if points used to compute isochrones should be snapped to the nearest point on the street network.
 #' @param returnclass deprecated.
 #' @param osrm.server the base URL of the routing server.
 #' getOption("osrm.server") by default.
@@ -64,7 +65,7 @@
 #' }
 #' }
 osrmIsochrone <- function(loc, breaks = seq(from = 0, to = 60, length.out = 7),
-                          exclude, res = 30, returnclass,
+                          exclude, res = 30, nearest = NULL, returnclass,
                           osrm.server = getOption("osrm.server"),
                           osrm.profile = getOption("osrm.profile")) {
   opt <- options(error = NULL)
@@ -108,6 +109,12 @@ osrmIsochrone <- function(loc, breaks = seq(from = 0, to = 60, length.out = 7),
 
   # create a grid to obtain measures
   sgrid <- rgrid(loc = loc, dmax = dmax, res = res)
+  if (nearest == TRUE) {
+    sgrid <- rgrid_nearest(sgrid,
+                           osrm.server = osrm.server,
+                           osrm.profile = osrm.profile)
+  }
+  
   # slice the grid to make several API calls
   lsgr <- nrow(sgrid)
   niter <- lsgr %/% deco

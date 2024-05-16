@@ -9,6 +9,7 @@ osrmIsochrone(
   breaks = seq(from = 0, to = 60, length.out = 7),
   exclude,
   res = 30,
+  nearest = NULL,
   returnclass,
   osrm.server = getOption("osrm.server"),
   osrm.profile = getOption("osrm.profile")
@@ -33,6 +34,8 @@ in minutes.}
 \item{res}{number of points used to compute isochrones, one side of the square
 grid, the total number of points will be res*res. Increase res to obtain more
 detailed isochrones.}
+
+\item{nearest}{Set nearest = TRUE if points used to compute isochrones should be snapped to the nearest point on the street network.}
 
 \item{returnclass}{deprecated.}
 
