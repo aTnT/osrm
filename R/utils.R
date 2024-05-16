@@ -42,44 +42,6 @@ rgrid_nearest <- function(sgrid, osrm.server, osrm.profile) {
   )
 }
 
-# rgrid_nearest <- function(loc, dmax, res,
-#                           osrm.server = getOption("osrm.server"),
-#                           osrm.profile = getOption("osrm.profile")
-#                           ) {
-#   # create a regular grid centerd on loc
-#   coords <- sf::st_coordinates(loc)
-#   xf <- coords[1, 1]
-#   yf <- coords[1, 2]
-#   boxCoordX <- seq(
-#     from = xf - dmax,
-#     to = xf + dmax,
-#     length.out = res
-#   )
-#   boxCoordY <- seq(
-#     from = yf - dmax,
-#     to = yf + dmax,
-#     length.out = res
-#   )
-#   sgrid <- expand.grid(boxCoordX, boxCoordY)
-#   
-#   
-#   sgrid <- osrmNearest(
-#     loc = sgrid[1],
-#     osrm.server = osrm.server,
-#     osrm.profile = osrm.profile
-#   )
-#   sgrid <- data.frame(
-#     ID = seq(1, nrow(sgrid), 1),
-#     COORDX = sgrid[, 1],
-#     COORDY = sgrid[, 2]
-#   )
-#   sgrid <- sf::st_as_sf(sgrid,
-#                         coords = c("COORDX", "COORDY"),
-#                         crs = st_crs(loc), remove = FALSE
-#   )
-#   return(sgrid)
-# }
-
 # output formating
 tab_format <- function(res, src, dst, type) {
   if (type == "duration") {
